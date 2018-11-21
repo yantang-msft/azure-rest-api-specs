@@ -203,4 +203,8 @@ directive:
     from: DTL.json
     where: $.paths
     reason: testing doc suppression
+  - suppress: TrackedResourceListByImmediateParent
+    from: DTL.json
+    where: $.definitions
+    reason: testing suppression for warning
 ```
