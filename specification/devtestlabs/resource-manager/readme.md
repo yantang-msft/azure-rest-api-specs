@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2020-11
 ```
 
-
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11'
+``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.DevTestLab/stable/2020-11-11/DTL.json
 ```
+
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
@@ -193,4 +193,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/devtestlab/resource-manager/v2015_05_21_preview
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: XmsExamplesRequired
+    from: DTL.json
+    where: $.paths
+    reason: testing doc suppression
 ```
