@@ -169,4 +169,8 @@ directive:
     from: databox.json
     where: $.definitions.Preferences.properties.preferredDataCenterRegion
     reason: suppress
+  - suppress: APIVersionPattern
+    from: databox.json
+    where: $.info.version
+    reason: suppress
 ```
