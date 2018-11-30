@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2018-90
 ```
 
-
 ### Tag: package-2018-90
 
 These settings apply only when `--tag=package-2018-90` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-90'
+``` yaml $(tag) == 'package-2018-90'
 input-file:
   - Microsoft.DataBox/stable/2018-90-90/databox.json
 ```
+
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -155,4 +155,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ONE_OF_MISSING
+    from: databox.json
+    where: $.definitions.JobProperties.properties.details
+    reason: suppress
 ```
