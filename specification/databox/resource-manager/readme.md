@@ -165,4 +165,8 @@ directive:
     from: databox.json
     where: $.definitions.JobProperties.properties.details
     reason: suppress
+  - suppress: DescriptionAndTitleMissing
+    from: databox.json
+    where: $.definitions.Preferences.properties.preferredDataCenterRegion
+    reason: suppress
 ```
