@@ -1012,6 +1012,9 @@
     "HostNameSslState": {
       "description": "SSL-enabled hostname.",
       "type": "object",
+      "category": "network",
+      "level": "important",
+      "indexProperty": "name",
       "properties": {
         "name": {
           "description": "Hostname.",
@@ -1059,6 +1062,8 @@
     "HostingEnvironmentProfile": {
       "description": "Specification for an App Service Environment to use for this resource.",
       "type": "object",
+      "category": "hostenv",
+      "indexProperty": "id",
       "properties": {
         "id": {
           "description": "Resource ID of the App Service Environment.",
@@ -1619,33 +1624,40 @@
       "required": [
         "location"
       ],
+      "level": "important",
       "properties": {
         "id": {
           "description": "Resource Id.",
           "type": "string",
+          "level": "important",
           "readOnly": true
         },
         "name": {
           "description": "Resource Name.",
           "type": "string",
+          "level": "important",
           "readOnly": true
         },
         "kind": {
           "description": "Kind of resource.",
-          "type": "string"
+          "type": "string",
+          "level": "important"
         },
         "location": {
           "description": "Resource Location.",
-          "type": "string"
+          "type": "string",
+          "level": "important"
         },
         "type": {
           "description": "Resource type.",
           "type": "string",
+          "level": "important",
           "readOnly": true
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
+          "level": "normal",
           "additionalProperties": {
             "type": "string"
           }
@@ -1918,6 +1930,9 @@
     "Site": {
       "description": "A web app, a mobile app backend, or an API app.",
       "type": "object",
+      "category": "others",
+      "level": "normal",
+      "indexProperty": "id",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1930,11 +1945,14 @@
             "state": {
               "description": "Current state of the app.",
               "type": "string",
+              "level": "important",
               "readOnly": true
             },
             "hostNames": {
               "description": "Hostnames associated with the app.",
               "type": "array",
+              "category": "network",
+              "level": "important",
               "items": {
                 "type": "string"
               },
@@ -1943,6 +1961,7 @@
             "repositorySiteName": {
               "description": "Name of the repository site.",
               "type": "string",
+              "level": "important",
               "readOnly": true
             },
             "usageState": {
@@ -1952,6 +1971,7 @@
                 "Exceeded"
               ],
               "type": "string",
+              "level": "important",
               "readOnly": true,
               "x-ms-enum": {
                 "name": "UsageState",
@@ -1960,11 +1980,14 @@
             },
             "enabled": {
               "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
-              "type": "boolean"
+              "type": "boolean",
+              "level": "important"
             },
             "enabledHostNames": {
               "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\nthe app is not served on those hostnames.",
               "type": "array",
+              "category": "network",
+              "level": "important",
               "items": {
                 "type": "string"
               },
@@ -1978,6 +2001,7 @@
                 "DisasterRecoveryMode"
               ],
               "type": "string",
+              "level": "important",
               "readOnly": true,
               "x-ms-enum": {
                 "name": "SiteAvailabilityState",
@@ -1987,13 +2011,16 @@
             "hostNameSslStates": {
               "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
               "type": "array",
+              "category": "network",
+              "level": "important",
               "items": {
                 "$ref": "#/definitions/HostNameSslState"
               }
             },
             "serverFarmId": {
               "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
-              "type": "string"
+              "type": "string",
+              "level": "important"
             },
             "reserved": {
               "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
@@ -2008,6 +2035,8 @@
               "description": "Obsolete: Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
+              "category": "hostenv",
+              "level": "important",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -2017,6 +2046,8 @@
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
+              "category": "hostenv",
+              "level": "important",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -2026,6 +2057,7 @@
               "format": "date-time",
               "description": "Last time the app was modified, in UTC. Read-only.",
               "type": "string",
+              "level": "noise",
               "readOnly": true
             },
             "siteConfig": {
@@ -2035,6 +2067,8 @@
             "trafficManagerHostNames": {
               "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
               "type": "array",
+              "category": "network",
+              "level": "important",
               "items": {
                 "type": "string"
               },
@@ -2060,46 +2094,58 @@
             },
             "clientAffinityEnabled": {
               "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
-              "type": "boolean"
+              "type": "boolean",
+              "category": "appconfig"
             },
             "clientCertEnabled": {
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
-              "type": "boolean"
+              "type": "boolean",
+              "category": "appconfig"
             },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
-              "type": "boolean"
+              "type": "boolean",
+              "category": "network",
+              "level": "important"
             },
             "outboundIpAddresses": {
               "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.",
               "type": "string",
+              "category": "network",
+              "level": "important",
               "readOnly": true
             },
             "possibleOutboundIpAddresses": {
               "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants. Read-only.",
               "type": "string",
+              "category": "network",
+              "level": "important",
               "readOnly": true
             },
             "containerSize": {
               "format": "int32",
               "description": "Size of the function container.",
-              "type": "integer"
+              "type": "integer",
+              "category": "hostenv"
             },
             "dailyMemoryTimeQuota": {
               "format": "int32",
               "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
-              "type": "integer"
+              "type": "integer",
+              "category": "appconfig"
             },
             "suspendedTill": {
               "format": "date-time",
               "description": "App suspended till in case memory-time quota is exceeded.",
               "type": "string",
+              "category": "appconfig",
               "readOnly": true
             },
             "maxNumberOfWorkers": {
               "format": "int32",
               "description": "Maximum number of workers.\nThis only applies to Functions container.",
               "type": "integer",
+              "category": "appconfig",
               "readOnly": true
             },
             "cloningInfo": {
@@ -2122,6 +2168,8 @@
             "defaultHostName": {
               "description": "Default hostname of the app. Read-only.",
               "type": "string",
+              "category": "network",
+              "level": "important",
               "readOnly": true
             },
             "slotSwapStatus": {
@@ -2131,7 +2179,9 @@
             },
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
-              "type": "boolean"
+              "type": "boolean",
+              "category": "network",
+              "level": "important"
             }
           },
           "x-ms-client-flatten": true
@@ -2144,6 +2194,7 @@
     "SiteConfig": {
       "description": "Configuration of an App Service app.",
       "type": "object",
+      "category": "appconfig",
       "properties": {
         "numberOfWorkers": {
           "format": "int32",
@@ -2160,61 +2211,75 @@
         "netFrameworkVersion": {
           "description": ".NET Framework version.",
           "default": "v4.6",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "phpVersion": {
           "description": "Version of PHP.",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "pythonVersion": {
           "description": "Version of Python.",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "nodeVersion": {
           "description": "Version of Node.js.",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "linuxFxVersion": {
           "description": "Linux App Framework and version",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "windowsFxVersion": {
           "description": "Xenon App Framework and version",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "requestTracingEnabled": {
           "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "requestTracingExpirationTime": {
           "format": "date-time",
           "description": "Request tracing expiration time.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "remoteDebuggingEnabled": {
           "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "remoteDebuggingVersion": {
           "description": "Remote debugging version.",
-          "type": "string"
+          "type": "string",
+          "category": "hostenv"
         },
         "httpLoggingEnabled": {
           "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "logsDirectorySizeLimit": {
           "format": "int32",
           "description": "HTTP logs directory size limit.",
-          "type": "integer"
+          "type": "integer",
+          "category": "appconfig"
         },
         "detailedErrorLoggingEnabled": {
           "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "publishingUsername": {
           "description": "Publishing user name.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "appSettings": {
           "description": "Application settings.",
@@ -2226,6 +2291,7 @@
         "azureStorageAccounts": {
           "description": "User-provided Azure storage accounts.",
           "type": "object",
+          "category": "appconfig",
           "additionalProperties": {
             "$ref": "#/definitions/AzureStorageInfoValue"
           }
@@ -2251,7 +2317,8 @@
         },
         "documentRoot": {
           "description": "Document root.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "scmType": {
           "description": "SCM type.",
@@ -2271,6 +2338,7 @@
             "VSO"
           ],
           "type": "string",
+          "category": "appconfig",
           "x-ms-enum": {
             "name": "ScmType",
             "modelAsString": true
@@ -2282,27 +2350,33 @@
         },
         "webSocketsEnabled": {
           "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "alwaysOn": {
           "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "javaVersion": {
           "description": "Java version.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "javaContainer": {
           "description": "Java container.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "javaContainerVersion": {
           "description": "Java container version.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "appCommandLine": {
           "description": "App command line to launch.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "managedPipelineMode": {
           "description": "Managed pipeline mode.",
@@ -2311,6 +2385,7 @@
             "Classic"
           ],
           "type": "string",
+          "category": "appconfig"
           "x-ms-enum": {
             "name": "ManagedPipelineMode",
             "modelAsString": false
@@ -2333,6 +2408,7 @@
             "RequestHash"
           ],
           "type": "string",
+          "category": "network",
           "x-ms-enum": {
             "name": "SiteLoadBalancing",
             "modelAsString": false
@@ -2348,19 +2424,23 @@
         },
         "autoHealEnabled": {
           "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "autoHealRules": {
           "$ref": "#/definitions/AutoHealRules",
-          "description": "Auto Heal rules."
+          "description": "Auto Heal rules.",
+          "category": "appconfig"
         },
         "tracingOptions": {
           "description": "Tracing options.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "vnetName": {
           "description": "Virtual Network name.",
           "type": "string",
+          "category": "network"
           "x-ms-mutability": [
             "create",
             "read"
@@ -2380,22 +2460,26 @@
         },
         "autoSwapSlotName": {
           "description": "Auto-swap slot name.",
-          "type": "string"
+          "type": "string",
+          "category": "appconfig"
         },
         "localMySqlEnabled": {
           "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
           "default": false,
-          "type": "boolean"
+          "type": "boolean",
+          "category": "appconfig"
         },
         "managedServiceIdentityId": {
           "format": "int32",
           "description": "Managed Service Identity Id",
-          "type": "integer"
+          "type": "integer",
+          "category": "appconfig"
         },
         "xManagedServiceIdentityId": {
           "format": "int32",
           "description": "Explicit Managed Service Identity Id",
-          "type": "integer"
+          "type": "integer",
+          "category": "appconfig"
         },
         "ipSecurityRestrictions": {
           "description": "IP security restrictions for main.",
@@ -2413,12 +2497,14 @@
         },
         "scmIpSecurityRestrictionsUseMain": {
           "description": "IP security restrictions for scm to use main.",
-          "type": "boolean"
+          "type": "boolean",
+          "category": "network"
         },
         "http20Enabled": {
           "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
           "default": true,
-          "type": "boolean"
+          "type": "boolean",
+          "category": "network"
         },
         "minTlsVersion": {
           "description": "MinTlsVersion: configures the minimum version of TLS required for SSL requests",
@@ -2428,6 +2514,7 @@
             "1.2"
           ],
           "type": "string",
+          "category": "network",
           "x-ms-enum": {
             "name": "SupportedTlsVersions",
             "modelAsString": true
@@ -2441,6 +2528,7 @@
             "Disabled"
           ],
           "type": "string",
+          "category": "network",
           "x-ms-enum": {
             "name": "FtpsState",
             "modelAsString": true
@@ -2451,7 +2539,8 @@
           "description": "Number of reserved instances.\nThis setting only applies to the Consumption Plan",
           "maximum": 10,
           "minimum": 0,
-          "type": "integer"
+          "type": "integer",
+          "category": "appconfig"
         }
       }
     },
