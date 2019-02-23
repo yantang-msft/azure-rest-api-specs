@@ -1624,7 +1624,6 @@
       "required": [
         "location"
       ],
-      "level": "important",
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -2385,7 +2384,7 @@
             "Classic"
           ],
           "type": "string",
-          "category": "appconfig"
+          "category": "appconfig",
           "x-ms-enum": {
             "name": "ManagedPipelineMode",
             "modelAsString": false
@@ -2440,7 +2439,7 @@
         "vnetName": {
           "description": "Virtual Network name.",
           "type": "string",
-          "category": "network"
+          "category": "network",
           "x-ms-mutability": [
             "create",
             "read"
